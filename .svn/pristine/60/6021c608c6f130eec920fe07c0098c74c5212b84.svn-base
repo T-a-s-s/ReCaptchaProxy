@@ -1,0 +1,40 @@
+package br.com.tokiomarine.captcha.services.impl;
+
+import org.springframework.stereotype.Service;
+
+import br.com.tokiomarine.captcha.encryption.Encryptor;
+import br.com.tokiomarine.captcha.enumerations.InvokeType;
+import br.com.tokiomarine.captcha.services.CaptchaService;
+
+@Service
+public class CaptchaServiceImpl implements CaptchaService 
+{
+
+	private final String  secretKey = "Key@TokioMarineC";
+	
+	@Override
+	public String getDoc() {
+		return "redirect:http://docstore-aceitev2.tokiomarine.com.br/docstore-services/rest/download-anexo/2ac35ae1-966d-4ae6-ad54-b52e756339a2";
+	}
+
+	@Override
+	public String getDoc(String tipoInvocacao, String initVector, String msg) {
+		switch (InvokeType.getByValue(tipoInvocacao)) {
+		case DOCSTORE:
+			String url = null;
+			try {
+				url = Encryptor.decrypt(secretKey, initVector, msg);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return "redirect:" + url;
+		case JSON_NUMPOL_NUMCERT_NUMOPER:
+			
+			break;
+		default:
+			break;
+		} 
+		return null;
+	}
+
+}

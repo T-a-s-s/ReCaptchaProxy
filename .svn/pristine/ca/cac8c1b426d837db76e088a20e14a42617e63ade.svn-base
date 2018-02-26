@@ -1,0 +1,9 @@
+package br.com.tokiomarine.captcha.encryption;
+
+public class urlEncryptor {
+	
+	public static void main (String...args) {
+		
+	}
+
+}

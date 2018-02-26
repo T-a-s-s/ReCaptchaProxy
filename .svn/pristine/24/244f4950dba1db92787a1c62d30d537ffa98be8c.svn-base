@@ -1,0 +1,10 @@
+package br.com.tokiomarine.captcha.services;
+
+public interface CaptchaService 
+{
+
+	String getDoc();
+
+	String getDoc(String tipoInvocacao, String initVector, String msg);
+
+}

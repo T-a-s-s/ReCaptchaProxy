@@ -1,0 +1,48 @@
+package br.com.tokiomarine.captcha.controllers;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import br.com.tokiomarine.captcha.services.CaptchaService;
+import br.com.tokiomarine.captcha.util.ReCaptchaUtil;
+
+@Controller
+@RequestMapping("/service")
+public class CaptchaController {
+	
+	@Autowired
+	CaptchaService captchaService;
+	
+	@GetMapping("")
+	public String captchaPage(Model model) {
+		model.addAttribute("recaptcha_site_key", "6LeIoQQTAAAAAGCYSThUxIwJiXgvMx2wGsfwpsKk");
+		return "captcha";
+	}
+	
+	@GetMapping("/{cryptoInvokeType}/{cryptoInitVector}/{cryptoMsg}")
+	public String captchaPageUrlDocstore(Model model, 
+										 @PathVariable(value="cryptoInvokeType") String cryptoInvokeType,
+										 @PathVariable(value="cryptoInitVector") String cryptoInitVector,
+										 @PathVariable(value="cryptoMsg") String cryptoMsg) {
+		model.addAttribute("recaptcha_site_key", "6LeIoQQTAAAAAGCYSThUxIwJiXgvMx2wGsfwpsKk");
+		return "captcha";
+	}
+	
+	@PostMapping("/verifyCaptcha")
+	public String verifyCaptcha(Model model, final HttpServletRequest request) {
+		final ReCaptchaUtil captchaUtil = new ReCaptchaUtil(request);
+		if (!captchaUtil.validate()) {
+			model.addAttribute("recaptcha_site_key", "6LeIoQQTAAAAAGCYSThUxIwJiXgvMx2wGsfwpsKk");
+			return "captcha";
+		}
+		return captchaService.getDoc();
+	}
+	
+}

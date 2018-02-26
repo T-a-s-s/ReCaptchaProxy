@@ -1,0 +1,7 @@
+package br.com.tokiomarine.captcha.enumerations;
+
+public enum InvokeType 
+{
+	DOCSTORE,
+	JSON_NUMPOL_NUMCERT_NUMOPER;
+}

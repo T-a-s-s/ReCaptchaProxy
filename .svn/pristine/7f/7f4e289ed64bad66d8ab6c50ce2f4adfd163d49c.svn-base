@@ -1,0 +1,16 @@
+package br.com.tokiomarine.captcha.enumerations;
+
+public enum InvokeType 
+{
+	DOCSTORE,
+	JSON_NUMPOL_NUMCERT_NUMOPER;
+	
+	public static InvokeType getByValue(String value) {
+		for (InvokeType it : InvokeType.values()) {
+			if(it.name().equals(value)) {
+				return it;
+			}
+		}
+		return null;
+	}
+}
