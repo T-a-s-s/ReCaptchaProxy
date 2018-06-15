@@ -4,8 +4,8 @@ public class urlEncryptor {
 	
 	public static void main (String...args) {
 		
-		String s = "http://docstore-aceitev2.tokiomarine.com.br/docstore-services/rest/download-anexo/2ac35ae1-966d-4ae6-ad54-b52e756339a2";
-		String secretKey = "Key@TokioMarineC";
+		String s = "http://url.destino/navegar/2ac35ae1-966d-4ae6-ad54-b52e756339a2";
+		String secretKey = "Key@TomasAndersS";
 		String initVector = Encryptor.generateInitVector();
 		String sCrypt = "";
 		try {
